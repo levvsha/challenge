@@ -2,9 +2,6 @@ import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
-import createHistory from 'history/createBrowserHistory';
-
 import configureStore from './store/configureStore';
 
 const isProd = process.env.NODE_ENV === 'production'; //eslint-disable-line no-undef
@@ -14,19 +11,16 @@ if (!isProd) {
   window.React = React;
 }
 
-const history = createHistory();
-const store = configureStore(history);
+const store = configureStore();
 const mountNode = document.getElementById('app');
 
 const renderApp = () => {
-  const App = require('./containers/App/App').default; //eslint-disable-line no-undef
+  const Game = require('./Game').default; //eslint-disable-line no-undef
 
   render((
     <AppContainer>
       <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <App />
-        </ConnectedRouter>
+        <Game />
       </Provider>
     </AppContainer>
   ), mountNode);
@@ -43,7 +37,7 @@ if (module.hot) { //eslint-disable-line no-undef
     }
   };
 
-  module.hot.accept('./containers/App/App', () => { //eslint-disable-line no-undef
+  module.hot.accept('./Game', () => { //eslint-disable-line no-undef
     setImmediate(() => { //eslint-disable-line no-undef
       // Preventing the hot reloading error from react-router
       unmountComponentAtNode(mountNode);

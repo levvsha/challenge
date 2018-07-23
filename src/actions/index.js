@@ -1,2 +1,2 @@
 /* eslint-disable no-multi-spaces */
-export * as TestActions     from './MazeActions';
+export * as TestActions     from './SetUpActions';

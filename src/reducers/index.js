@@ -2,10 +2,10 @@
 
 import { combineReducers } from 'redux';
 
-import testReducer        from './mazeReducer';
+import setUp        from './setUp';
 
 const rootReducer = combineReducers({
-  testReducer
+  setUp
 });
 
 export default rootReducer;
