@@ -1,2 +1,28 @@
 @import "./commonStyles/commonHelperStyles/reset.styl"
-@import "./commonStyles/commonHelperStyles/milligram.styl"
+@import "commonStyles/commonHelperStyles/milligram.styl"
+
+body {
+  background: #FC354C;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #0ABFBC, #FC354C);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #0ABFBC, #FC354C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.game-app-root {
+  .columns {
+    display: flex
+    justify-content: space-evenly
+  }
+
+  .app-title {
+    text-align: center
+    font-weight: 600
+  }
+
+  .column {
+    width: 46%
+    background-color: white
+    border-radius: 20px
+    min-height: 500px
+    padding: 15px
+  }
+}

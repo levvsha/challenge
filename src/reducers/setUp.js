@@ -22,7 +22,9 @@ const initialState = {
 
 export default function setUp(state = initialState, action) {
   const {
-    type
+    type,
+    value,
+    property
   } = action;
 
   switch (type) {
@@ -34,6 +36,15 @@ export default function setUp(state = initialState, action) {
           width: state.mazeSizeExtremums[0],
           height: state.mazeSizeExtremums[0],
           difficulty: state.difficultyExtremums[0]
+        }
+      };
+
+    case setUpActionTypes.UPDATE_SETTINGS:
+      return {
+        ...state,
+        gameParams: {
+          ...state.gameParams,
+          [property]: value
         }
       };
 

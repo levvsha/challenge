@@ -12,9 +12,18 @@ export default class Game extends Component {
 
   render() {
     return (
-      <div className="maze-app">
-        <SetUp />
-        <Maze />
+      <div className="game-app-root">
+        <h1 className="app-title">
+          Trustpilot Pony Challenge
+        </h1>
+        <div className="columns">
+          <div className="column">
+            <SetUp />
+          </div>
+          <div className="column">
+            <Maze />
+          </div>
+        </div>
       </div>
     );
   }

@@ -31,61 +31,43 @@ module.exports = {
         ]
       },
       {
-        test: /\.styl|\.css/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1,
-                localIdentName: '[local]',
-                sourceMap: true
-              }
-            },
-            {
-              loader: 'stylus-loader',
-              options: {
-                sourceMap: true,
-                import: [path.resolve(__dirname, '../src/commonStyles/commonStyles.styl')]
-              }
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              localIdentName: '[local]',
+              sourceMap: true
             }
-          ]
-        })
+          }
+        ]
       },
       {
-        test: /\.woff$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: '[path][name].[ext]',
-          mimetype: 'application/font-woff'
-        }
-      },
-      {
-        test: /\.woff2$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: '[path][name].[ext]',
-          mimetype: 'application/font-woff'
-        }
-      },
-      {
-        test: /\.ttf$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: '[path][name].[ext]',
-          mimetype: 'application/octet-stream'
-        }
-      },
-      {
-        test: /\.eot$/,
-        loader: 'file-loader',
-        options: {
-          name: '[path][name].[ext]'
-        }
+        test: /\.styl$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              localIdentName: '[local]',
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'stylus-loader',
+            options: {
+              sourceMap: true,
+              import: [path.resolve(__dirname, '../src/commonStyles/commonStyles.styl')]
+            }
+          }
+        ]
       },
       {
         test:  /\.svg$/,
