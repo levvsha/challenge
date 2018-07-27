@@ -17,14 +17,19 @@ const initialState = {
     width: null,
     height: null,
     difficulty: null
-  }
+  },
+  mazeMatrix: null,
+  ponyCoords: null,
+  enemyCoords: null,
+  exitCoords: null
 };
 
 export default function setUp(state = initialState, action) {
   const {
     type,
     value,
-    property
+    property,
+    updatedFields
   } = action;
 
   switch (type) {
@@ -47,6 +52,12 @@ export default function setUp(state = initialState, action) {
           [property]: value
         }
       };
+
+    case setUpActionTypes.UPDATE_MAZE:
+      return {
+        ...state,
+        ...updatedFields
+      }
 
     default:
       return state;

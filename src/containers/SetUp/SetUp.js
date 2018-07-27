@@ -13,7 +13,6 @@ import RangeSlider from 'components/RangeSlider';
 @connect(state => ({
   setUp: state.setUp
 }), dispatch => ({
-  dispatch,
   actions: bindActionCreators(SetUpActions, dispatch)
 }))
 export default class SetUp extends Component {
@@ -26,6 +25,17 @@ export default class SetUp extends Component {
     super(props);
 
     props.actions.setInitialSettings();
+  }
+
+  createMaze = () => {
+    const { gameParams } = this.props.setUp;
+
+    this.props.actions.createMaze({
+      'maze-width': gameParams.width,
+      'maze-height': gameParams.height,
+      'maze-player-name': gameParams.selectedPony,
+      difficulty: gameParams.difficulty
+    });
   }
 
   handleSelectChange = (event) => {
@@ -75,7 +85,7 @@ export default class SetUp extends Component {
               key="width"
               name="width"
               value={gameParams.width}
-              label={'Set maze width:'}
+              label="Set maze width:"
               extremums={mazeSizeExtremums}
               onChange={updateSettings}
             />
@@ -86,7 +96,7 @@ export default class SetUp extends Component {
               key="height"
               name="height"
               value={gameParams.height}
-              label={'Set maze height:'}
+              label="Set maze height:"
               extremums={mazeSizeExtremums}
               onChange={updateSettings}
             />
@@ -97,12 +107,15 @@ export default class SetUp extends Component {
               key="difficulty"
               name="difficulty"
               value={gameParams.difficulty}
-              label={'Set difficulty:'}
+              label="Set difficulty:"
               extremums={difficultyExtremums}
               onChange={updateSettings}
             />
         }
-        <button className="button button-outline float-right">
+        <button
+          onClick={this.createMaze}
+          className="button button-outline float-right"
+        >
           Start game
         </button>
       </div>
