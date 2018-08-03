@@ -5,7 +5,7 @@ import SetUp from './containers/SetUp';
 import Maze from './containers/Maze';
 
 const Game = () => (
-  <div className="game-app-root">
+  <div className="c-game-app-root">
     <h1 className="app-title">
       Trustpilot Pony Challenge
     </h1>

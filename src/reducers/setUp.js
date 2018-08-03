@@ -18,11 +18,21 @@ const initialState = {
     height: null,
     difficulty: null
   },
-  mazeMatrix: null,
+  mazeMatrix: [],
   ponyCoords: null,
   enemyCoords: null,
   exitCoords: null
 };
+
+/* We set default game params depends on the ponies list and extremums. */
+Object.assign(initialState, {
+  gameParams: {
+    selectedPony: initialState.ponies[0],
+    width: initialState.mazeSizeExtremums[0],
+    height: initialState.mazeSizeExtremums[0],
+    difficulty: initialState.difficultyExtremums[0]
+  }
+});
 
 export default function setUp(state = initialState, action) {
   const {

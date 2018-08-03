@@ -5,6 +5,7 @@ import Type from 'prop-types';
 import { connect } from 'react-redux';
 
 import MazeEntity from '../../components/MazeEntity';
+import IntroText from '../../components/IntroText';
 import PonyIcon from '../../../images/pony.svg';
 import EnemyIcon from '../../../images/enemy.svg';
 import ExitIcon from '../../../images/exit.svg';
@@ -14,14 +15,13 @@ import ExitIcon from '../../../images/exit.svg';
   ponyCoords: state.setUp.ponyCoords,
   enemyCoords: state.setUp.enemyCoords,
   exitCoords: state.setUp.exitCoords,
-}), dispatch => ({
-}))
+}), null)
 export default class Maze extends Component {
   static propTypes = {
     children: Type.array
   }
 
-  render() {
+  renderMazeLayout = () => {
     const {
       ponyCoords,
       enemyCoords,
@@ -33,27 +33,27 @@ export default class Maze extends Component {
       <div className="c-maze">
         {
           ponyCoords &&
-            <MazeEntity
-              key="pony"
-              Icon={PonyIcon}
-              coords={ponyCoords}
-            />
+          <MazeEntity
+            key="pony"
+            Icon={PonyIcon}
+            coords={ponyCoords}
+          />
         }
         {
           enemyCoords &&
-            <MazeEntity
-              key="enemy"
-              Icon={EnemyIcon}
-              coords={enemyCoords}
-            />
+          <MazeEntity
+            key="enemy"
+            Icon={EnemyIcon}
+            coords={enemyCoords}
+          />
         }
         {
           exitCoords &&
-            <MazeEntity
-              key="exit"
-              Icon={ExitIcon}
-              coords={exitCoords}
-            />
+          <MazeEntity
+            key="exit"
+            Icon={ExitIcon}
+            coords={exitCoords}
+          />
         }
         {
           mazeMatrix && mazeMatrix.map((row, rowIndex) => (
@@ -79,5 +79,13 @@ export default class Maze extends Component {
         }
       </div>
     );
+  }
+
+  render() {
+    const {
+      mazeMatrix
+    } = this.props;
+
+    return mazeMatrix.length ? this.renderMazeLayout() : <IntroText />
   }
 }

@@ -7,7 +7,11 @@ body {
   background: linear-gradient(to right, #0ABFBC, #FC354C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.game-app-root {
+.g-title {
+  text-align: center
+}
+
+.c-game-app-root {
   .columns {
     display: flex
     justify-content: space-evenly
@@ -16,6 +20,8 @@ body {
   .app-title {
     text-align: center
     font-weight: 600
+    color: #f03d9c
+    text-shadow: white -1px 2px 0px
   }
 
   .column {
@@ -30,6 +36,7 @@ body {
     }
 
     &.maze {
+      min-width: 340px
       display: flex
       align-items: center
     }

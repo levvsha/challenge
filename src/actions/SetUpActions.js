@@ -17,7 +17,7 @@ export function updateSettings(value, property) {
 
 export function createMaze(data) {
   return dispatch => {
-    apiCall({
+    return apiCall({
       method: 'POST',
       path: '/pony-challenge/maze',
       data
