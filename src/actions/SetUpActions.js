@@ -1,17 +1,17 @@
 import * as setUpActionTypes from '../constants/SetUpConstants';
 import apiCall from 'utils/apiCall';
 
-export function setInitialSettings() {
-  return {
-    type: setUpActionTypes.SET_INITIAL_SETTINGS
-  }
-}
-
 export function updateSettings(value, property) {
   return {
     type: setUpActionTypes.UPDATE_SETTINGS,
     value,
     property
+  }
+}
+
+export function switchToSetUpMode() {
+  return {
+    type: setUpActionTypes.SWITCH_TO_SETUP_MODE
   }
 }
 
@@ -33,19 +33,19 @@ export function getMazeState(mazeId) {
       method: 'GET',
       path: `/pony-challenge/maze/${ mazeId }`,
     }).then(response => {
-      console.log('response ==>', response);
       const { data } = response;
-
-      const mazeMatrix = chunkArray(getCells(data.data).slice(), data.size[0]);
-
-      const getCoords = (position, rowSize) => ({
-        x: position % rowSize,
-        y: Math.floor(position / rowSize)
-      });
+      const mazeMatrix = chunkArray(getCells(data.data), data.size[0]);
 
       const ponyCoords = getCoords(data.pony[0], data.size[0]);
       const enemyCoords = getCoords(data.domokun[0], data.size[0]);
       const exitCoords = getCoords(data['end-point'][0], data.size[0]);
+
+      const allowedDirections = {
+        left: !mazeMatrix[ponyCoords.y][ponyCoords.x].left,
+        right: !mazeMatrix[ponyCoords.y][ponyCoords.x + 1] || !mazeMatrix[ponyCoords.y][ponyCoords.x + 1].left,
+        top: !mazeMatrix[ponyCoords.y][ponyCoords.x].top,
+        bottom: !mazeMatrix[ponyCoords.y + 1] || !mazeMatrix[ponyCoords.y + 1][ponyCoords.x].top,
+      };
 
       dispatch({
         type: setUpActionTypes.UPDATE_MAZE,
@@ -53,19 +53,28 @@ export function getMazeState(mazeId) {
           mazeMatrix,
           ponyCoords,
           enemyCoords,
-          exitCoords
+          exitCoords,
+          allowedDirections,
+          inTheGame: true
         }
       })
     });
   }
 }
 
+/* helper functions */
+
+const getCoords = (position, rowSize) => ({
+  x: position % rowSize,
+  y: Math.floor(position / rowSize)
+});
+
 function chunkArray(array, itemsInChunk) {
+  const arrayCopy = array.slice();
   const result = [];
 
-  while(array.length) {
-    result.push(array.splice(0, itemsInChunk))
-
+  while(arrayCopy.length) {
+    result.push(arrayCopy.splice(0, itemsInChunk))
   }
 
   return result;

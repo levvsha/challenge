@@ -1,7 +1,6 @@
 import './SetUp.styl';
-import 'react-input-range/lib/css/index.css';
 
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Type from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -10,27 +9,29 @@ import _isNumber from 'lodash/isNumber';
 import * as SetUpActions from 'actions/SetUpActions';
 import RangeSlider from 'components/RangeSlider';
 import Preloader from 'components/Preloader';
-import Instruction from 'components/Instruction';
 
 @connect(state => ({
-  setUp: state.setUp
+  difficultyExtremums: state.setUp.difficultyExtremums,
+  gameParams: state.setUp.gameParams,
+  mazeSizeExtremums: state.setUp.mazeSizeExtremums,
+  ponies: state.setUp.ponies
 }), dispatch => ({
   actions: bindActionCreators(SetUpActions, dispatch)
 }))
 export default class SetUp extends Component {
   static propTypes = {
-    children: Type.array,
-    setUp: Type.object
+    difficultyExtremums: Type.array,
+    gameParams: Type.object,
+    mazeSizeExtremums: Type.array,
+    ponies: Type.array
   }
 
   state = {
     isLoading: false,
-    showInstruction: false,
-    errorMessage: ''
   }
 
   createMaze = () => {
-    const { gameParams } = this.props.setUp;
+    const { gameParams } = this.props;
 
     this.setState({
       isLoading: true
@@ -43,8 +44,7 @@ export default class SetUp extends Component {
       difficulty: gameParams.difficulty
     }).then(() => {
       this.setState({
-        isLoading: false,
-        showInstruction: true
+        isLoading: false
       });
     }).catch(() => {
       this.setState({
@@ -57,27 +57,19 @@ export default class SetUp extends Component {
     this.props.actions.updateSettings(event.target.value, 'selectedPony');
   }
 
-  hideInstruction = () => {
-    this.props.actions.setInitialSettings();
-
-    this.setState({
-      showInstruction: false
-    })
-  }
-
-  renderSetUpLayout = () => {
+  render() {
     const {
       difficultyExtremums,
       gameParams,
       mazeSizeExtremums,
       ponies
-    } = this.props.setUp;
+    } = this.props;
 
     const { updateSettings } = this.props.actions;
     const { isLoading } = this.state;
 
     return (
-      <Fragment>
+      <div className="c-set-up">
         <h2 className="g-title">
           Set up the game
         </h2>
@@ -150,18 +142,6 @@ export default class SetUp extends Component {
         >
           Start game
         </button>
-      </Fragment>
-    )
-  }
-
-  render() {
-    return (
-      <div className="c-set-up">
-        {
-          !this.state.showInstruction
-            ? <Instruction hideInstruction={this.hideInstruction} />
-            : this.renderSetUpLayout()
-        }
       </div>
     );
   }

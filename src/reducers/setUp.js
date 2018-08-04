@@ -21,7 +21,14 @@ const initialState = {
   mazeMatrix: [],
   ponyCoords: null,
   enemyCoords: null,
-  exitCoords: null
+  exitCoords: null,
+  inTheGame: false,
+  allowedDirections: {
+    left: false,
+    right: false,
+    top: false,
+    bottom: false
+  }
 };
 
 /* We set default game params depends on the ponies list and extremums. */
@@ -43,15 +50,10 @@ export default function setUp(state = initialState, action) {
   } = action;
 
   switch (type) {
-    case setUpActionTypes.SET_INITIAL_SETTINGS:
+    case setUpActionTypes.SWITCH_TO_SETUP_MODE:
       return {
         ...state,
-        gameParams: {
-          selectedPony: state.ponies[0],
-          width: state.mazeSizeExtremums[0],
-          height: state.mazeSizeExtremums[0],
-          difficulty: state.difficultyExtremums[0]
-        }
+        inTheGame: false
       };
 
     case setUpActionTypes.UPDATE_SETTINGS:

@@ -1,3 +1,4 @@
+import 'react-input-range/lib/css/index.css';
 import './RangeSlider.styl';
 
 import React, { Component } from 'react';

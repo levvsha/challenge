@@ -5,7 +5,6 @@ import Type from 'prop-types';
 import { connect } from 'react-redux';
 
 import MazeEntity from '../../components/MazeEntity';
-import IntroText from '../../components/IntroText';
 import PonyIcon from '../../../images/pony.svg';
 import EnemyIcon from '../../../images/enemy.svg';
 import ExitIcon from '../../../images/exit.svg';
@@ -18,10 +17,13 @@ import ExitIcon from '../../../images/exit.svg';
 }), null)
 export default class Maze extends Component {
   static propTypes = {
-    children: Type.array
+    ponyCoords: Type.object,
+    enemyCoords: Type.object,
+    exitCoords: Type.object,
+    mazeMatrix: Type.array
   }
 
-  renderMazeLayout = () => {
+  render() {
     const {
       ponyCoords,
       enemyCoords,
@@ -79,13 +81,5 @@ export default class Maze extends Component {
         }
       </div>
     );
-  }
-
-  render() {
-    const {
-      mazeMatrix
-    } = this.props;
-
-    return mazeMatrix.length ? this.renderMazeLayout() : <IntroText />
   }
 }

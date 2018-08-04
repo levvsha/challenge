@@ -15,7 +15,7 @@ const store = configureStore();
 const mountNode = document.getElementById('app');
 
 const renderApp = () => {
-  const Game = require('./Game').default; //eslint-disable-line no-undef
+  const Game = require('./containers/Game').default; //eslint-disable-line no-undef
 
   render((
     <AppContainer>
@@ -37,7 +37,7 @@ if (module.hot) { //eslint-disable-line no-undef
     }
   };
 
-  module.hot.accept('./Game', () => { //eslint-disable-line no-undef
+  module.hot.accept('./containers/Game', () => { //eslint-disable-line no-undef
     setImmediate(() => { //eslint-disable-line no-undef
       // Preventing the hot reloading error from react-router
       unmountComponentAtNode(mountNode);
