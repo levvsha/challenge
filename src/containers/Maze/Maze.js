@@ -10,17 +10,21 @@ import EnemyIcon from '../../../images/enemy.svg';
 import ExitIcon from '../../../images/exit.svg';
 
 @connect(state => ({
-  mazeMatrix: state.setUp.mazeMatrix,
-  ponyCoords: state.setUp.ponyCoords,
-  enemyCoords: state.setUp.enemyCoords,
-  exitCoords: state.setUp.exitCoords,
+  mazeMatrix: state.game.mazeMatrix,
+  ponyCoords: state.game.ponyCoords,
+  enemyCoords: state.game.enemyCoords,
+  exitCoords: state.game.exitCoords,
+  isGameFinished: state.game.isGameFinished,
+  isWin: state.game.isWin
 }), null)
 export default class Maze extends Component {
   static propTypes = {
     ponyCoords: Type.object,
     enemyCoords: Type.object,
     exitCoords: Type.object,
-    mazeMatrix: Type.array
+    mazeMatrix: Type.array,
+    isGameFinished: Type.bool,
+    isWin: Type.bool
   }
 
   render() {
@@ -28,13 +32,25 @@ export default class Maze extends Component {
       ponyCoords,
       enemyCoords,
       exitCoords,
-      mazeMatrix
+      mazeMatrix,
+      isGameFinished,
+      isWin
     } = this.props;
 
     return (
       <div className="c-maze">
         {
-          ponyCoords &&
+          isGameFinished &&
+            <div className="maze-overlay">
+              {
+                isWin
+                  ? 'Congrats! You won!'
+                  : 'You lost. Try again'
+              }
+            </div>
+        }
+        {
+          !isGameFinished && ponyCoords &&
           <MazeEntity
             key="pony"
             Icon={PonyIcon}
@@ -46,7 +62,7 @@ export default class Maze extends Component {
           <MazeEntity
             key="enemy"
             Icon={EnemyIcon}
-            coords={enemyCoords}
+            coords={isGameFinished && !isWin ? ponyCoords : enemyCoords}
           />
         }
         {

@@ -1,4 +1,4 @@
-import * as setUpActionTypes from '../constants/SetUpConstants';
+import * as gameActionTypes from '../constants/GameConstants';
 
 const initialState = {
   ponies: [
@@ -23,6 +23,10 @@ const initialState = {
   enemyCoords: null,
   exitCoords: null,
   inTheGame: false,
+  isLoading: false,
+  currentMazeId: null,
+  isGameFinished: false,
+  isWin: false,
   allowedDirections: {
     left: false,
     right: false,
@@ -46,17 +50,38 @@ export default function setUp(state = initialState, action) {
     type,
     value,
     property,
-    updatedFields
+    updatedFields,
+    isWin
   } = action;
 
   switch (type) {
-    case setUpActionTypes.SWITCH_TO_SETUP_MODE:
+    case gameActionTypes.SWITCH_TO_SETUP_MODE:
       return {
         ...state,
-        inTheGame: false
+        inTheGame: false,
+        isGameFinished: false
       };
 
-    case setUpActionTypes.UPDATE_SETTINGS:
+    case gameActionTypes.START_REQUEST:
+      return {
+        ...state,
+        isLoading: true
+      };
+
+    case gameActionTypes.GAME_FINISHED:
+      return {
+        ...state,
+        isWin,
+        isGameFinished: true
+      };
+
+    case gameActionTypes.FINISH_REQUEST:
+      return {
+        ...state,
+        isLoading: false
+      };
+
+    case gameActionTypes.UPDATE_SETTINGS:
       return {
         ...state,
         gameParams: {
@@ -65,7 +90,7 @@ export default function setUp(state = initialState, action) {
         }
       };
 
-    case setUpActionTypes.UPDATE_MAZE:
+    case gameActionTypes.UPDATE_MAZE:
       return {
         ...state,
         ...updatedFields

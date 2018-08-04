@@ -6,11 +6,11 @@ import {connect} from 'react-redux';
 
 import SetUp from 'containers/SetUp';
 import Maze from 'containers/Maze';
-import Instruction from 'containers/Instruction';
+import Control from 'containers/Control';
 import IntroText from 'components/IntroText';
 
 @connect(state => ({
-  inTheGame: state.setUp.inTheGame
+  inTheGame: state.game.inTheGame
 }), null)
 export default class Game extends Component {
   static propTypes = {
@@ -29,7 +29,7 @@ export default class Game extends Component {
           <div className="column set-up">
             {
               inTheGame
-                ? <Instruction />
+                ? <Control />
                 : <SetUp />
             }
           </div>

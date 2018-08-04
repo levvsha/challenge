@@ -1,11 +1,9 @@
-/* eslint-disable no-multi-spaces */
-
 import { combineReducers } from 'redux';
 
-import setUp        from './setUp';
+import game from './game';
 
 const rootReducer = combineReducers({
-  setUp
+  game
 });
 
 export default rootReducer;

@@ -6,50 +6,36 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import _isNumber from 'lodash/isNumber';
 
-import * as SetUpActions from 'actions/SetUpActions';
+import * as GameActions from 'actions/GameActions.js';
 import RangeSlider from 'components/RangeSlider';
 import Preloader from 'components/Preloader';
 
 @connect(state => ({
-  difficultyExtremums: state.setUp.difficultyExtremums,
-  gameParams: state.setUp.gameParams,
-  mazeSizeExtremums: state.setUp.mazeSizeExtremums,
-  ponies: state.setUp.ponies
+  difficultyExtremums: state.game.difficultyExtremums,
+  gameParams: state.game.gameParams,
+  mazeSizeExtremums: state.game.mazeSizeExtremums,
+  ponies: state.game.ponies,
+  isLoading: state.game.isLoading
 }), dispatch => ({
-  actions: bindActionCreators(SetUpActions, dispatch)
+  actions: bindActionCreators(GameActions, dispatch)
 }))
 export default class SetUp extends Component {
   static propTypes = {
     difficultyExtremums: Type.array,
     gameParams: Type.object,
     mazeSizeExtremums: Type.array,
-    ponies: Type.array
-  }
-
-  state = {
-    isLoading: false,
+    ponies: Type.array,
+    actions: Type.object
   }
 
   createMaze = () => {
     const { gameParams } = this.props;
-
-    this.setState({
-      isLoading: true
-    });
 
     this.props.actions.createMaze({
       'maze-width': gameParams.width,
       'maze-height': gameParams.height,
       'maze-player-name': gameParams.selectedPony,
       difficulty: gameParams.difficulty
-    }).then(() => {
-      this.setState({
-        isLoading: false
-      });
-    }).catch(() => {
-      this.setState({
-        isLoading: false
-      });
     });
   }
 
@@ -62,11 +48,11 @@ export default class SetUp extends Component {
       difficultyExtremums,
       gameParams,
       mazeSizeExtremums,
-      ponies
+      ponies,
+      isLoading
     } = this.props;
 
     const { updateSettings } = this.props.actions;
-    const { isLoading } = this.state;
 
     return (
       <div className="c-set-up">
@@ -138,7 +124,7 @@ export default class SetUp extends Component {
         <button
           onClick={this.createMaze}
           className="button button-outline float-right"
-          disabled={this.state.isLoading}
+          disabled={isLoading}
         >
           Start game
         </button>
