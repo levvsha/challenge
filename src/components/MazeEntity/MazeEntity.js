@@ -19,7 +19,10 @@ const MazeEntity = ({ Icon, coords }) => (
 
 MazeEntity.propTypes = {
   Icon: Type.func,
-  coords: Type.object
+  coords: Type.shape({
+    x: Type.number.isRequired,
+    y: Type.number.isRequired
+  }).isRequired
 }
 
 export default MazeEntity;

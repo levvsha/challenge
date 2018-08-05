@@ -19,12 +19,26 @@ import ExitIcon from '../../../images/exit.svg';
 }), null)
 export default class Maze extends Component {
   static propTypes = {
-    ponyCoords: Type.object,
-    enemyCoords: Type.object,
-    exitCoords: Type.object,
-    mazeMatrix: Type.array,
-    isGameFinished: Type.bool,
-    isWin: Type.bool
+    ponyCoords: Type.shape({
+      x: Type.number.isRequired,
+      y: Type.number.isRequired
+    }).isRequired,
+    enemyCoords: Type.shape({
+      x: Type.number.isRequired,
+      y: Type.number.isRequired
+    }).isRequired,
+    exitCoords: Type.shape({
+      x: Type.number.isRequired,
+      y: Type.number.isRequired
+    }).isRequired,
+    mazeMatrix: Type.arrayOf(
+      Type.arrayOf(Type.shape({
+        left: Type.bool,
+        top: Type.bool
+      }))
+    ).isRequired,
+    isGameFinished: Type.bool.isRequired,
+    isWin: Type.bool.isRequired
   }
 
   render() {
@@ -36,7 +50,7 @@ export default class Maze extends Component {
       isGameFinished,
       isWin
     } = this.props;
-
+    console.log('this.props ==>', this.props);
     return (
       <div className="c-maze">
         {

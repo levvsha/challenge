@@ -12,6 +12,7 @@ module.exports = {
   context: path.resolve(__dirname , '..'),
   devtool: 'source-map',
   entry: [
+    'babel-polyfill',
     './src/app.js'
   ],
   output: {
@@ -31,43 +32,27 @@ module.exports = {
         ]
       },
       {
-        test: /\.css$/,
-        use: [
-          {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-              localIdentName: '[local]',
-              sourceMap: true
+        test: /\.styl|\.css/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+                localIdentName: '[local]',
+                sourceMap: true
+              }
+            },
+            {
+              loader: 'stylus-loader',
+              options: {
+                sourceMap: true,
+                import: [path.resolve(__dirname, '../src/commonStyles/commonStyles.styl')]
+              }
             }
-          }
-        ]
-      },
-      {
-        test: /\.styl$/,
-        use: [
-          {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-              localIdentName: '[local]',
-              sourceMap: true
-            }
-          },
-          {
-            loader: 'stylus-loader',
-            options: {
-              sourceMap: true,
-              import: [path.resolve(__dirname, '../src/commonStyles/commonStyles.styl')]
-            }
-          }
-        ]
+          ]
+        })
       },
       {
         test:  /\.svg$/,

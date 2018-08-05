@@ -21,11 +21,17 @@ import Preloader from 'components/Preloader';
 }))
 export default class SetUp extends Component {
   static propTypes = {
-    difficultyExtremums: Type.array,
-    gameParams: Type.object,
-    mazeSizeExtremums: Type.array,
-    ponies: Type.array,
-    actions: Type.object
+    difficultyExtremums: Type.arrayOf(Type.number).isRequired,
+    gameParams: Type.shape({
+      difficulty: Type.number.isRequired,
+      height: Type.number.isRequired,
+      selectedPony: Type.string.isRequired,
+      width: Type.number.isRequired
+    }),
+    mazeSizeExtremums: Type.arrayOf(Type.number).isRequired,
+    ponies: Type.arrayOf(Type.string).isRequired,
+    actions: Type.objectOf(Type.func).isRequired,
+    isLoading: Type.bool.isRequired
   }
 
   createMaze = () => {

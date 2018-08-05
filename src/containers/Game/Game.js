@@ -14,7 +14,7 @@ import IntroText from 'components/IntroText';
 }), null)
 export default class Game extends Component {
   static propTypes = {
-    inTheGame: Type.bool
+    inTheGame: Type.bool.isRequired
   };
 
   render() {

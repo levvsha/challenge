@@ -7,11 +7,11 @@ import InputRange from 'react-input-range';
 
 export default class RangeSlider extends Component {
   static propTypes = {
-    extremums: Type.array,
+    extremums: Type.arrayOf(Type.number).isRequired,
     label: Type.string,
-    name: Type.string,
-    onChange: Type.func,
-    value: Type.number
+    name: Type.string.isRequired,
+    onChange: Type.func.isRequired,
+    value: Type.number.isRequired
   };
 
   handleChange = (value) => {

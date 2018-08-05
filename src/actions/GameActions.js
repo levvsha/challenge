@@ -17,12 +17,11 @@ export function switchToSetUpMode() {
 }
 
 export function makeStep(direction) {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     const { ponyCoords, mazeMatrix, currentMazeId } = getState().game;
     const newPonyCoords = getNewPonyCoords(ponyCoords, direction);
-    console.log('newPonyCoords ==>', newPonyCoords)
     const newAllowedDirections = getAllowedDirections(mazeMatrix, newPonyCoords);
-console.log('newAllowedDirections ==>', newAllowedDirections)
+
     dispatch({
       type: gameActionTypes.START_REQUEST
     });
@@ -35,7 +34,9 @@ console.log('newAllowedDirections ==>', newAllowedDirections)
       }
     });
 
-    return gameApi.makeStep(currentMazeId, direction).then((response) => {
+    try {
+      const response = await gameApi.makeStep(currentMazeId, direction);
+
       if (config.successStepMessages.indexOf(response.data['state-result']) >= 0) {
         dispatch(getMazeState());
       } else {
@@ -57,27 +58,35 @@ console.log('newAllowedDirections ==>', newAllowedDirections)
           });
         }
       }
-    });
+    } catch (error) {
+      console.error('makeStep action: ', error);
+    }
   }
 }
 
 export function createMaze(data) {
-  return dispatch => {
+  return async dispatch => {
     dispatch({
       type: gameActionTypes.START_REQUEST
     });
 
-    return gameApi.createMaze(data).then(response => {
-      return dispatch(getMazeStateFirstTime(response.data.maze_id))
-    });
+    try {
+      const response = await gameApi.createMaze(data);
+
+      dispatch(getMazeStateFirstTime(response.data.maze_id));
+    } catch (error) {
+      console.error('createMaze action', error);
+    }
   }
 }
 
 export function getMazeState() {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     const { currentMazeId, ponyCoords, exitCoords } = getState().game;
 
-    return gameApi.getMazeState(currentMazeId).then(response => {
+    try {
+      const response = await gameApi.getMazeState(currentMazeId);
+
       const { data } = response;
       const enemyCoords = getCoords(data.domokun[0], data.size[0]);
       const isGameFinished = checkIsGameFinished({ enemyCoords, ponyCoords, exitCoords});
@@ -99,20 +108,20 @@ export function getMazeState() {
           enemyCoords,
         }
       });
-    });
+    } catch (error) {
+      console.error('getMazeState action', error);
+    }
   }
 }
 
 export function getMazeStateFirstTime(mazeId) {
-  return dispatch => {
-    gameApi.getMazeState(mazeId).then(response => {
-      const { data } = response;
+  return async dispatch => {
+    try {
+      const { data } = await gameApi.getMazeState(mazeId);
       const mazeMatrix = chunkArray(getCells(data.data), data.size[0]);
-
       const ponyCoords = getCoords(data.pony[0], data.size[0]);
       const enemyCoords = getCoords(data.domokun[0], data.size[0]);
       const exitCoords = getCoords(data['end-point'][0], data.size[0]);
-
       const allowedDirections = getAllowedDirections(mazeMatrix, ponyCoords);
 
       dispatch({
@@ -131,7 +140,9 @@ export function getMazeStateFirstTime(mazeId) {
       dispatch({
         type: gameActionTypes.FINISH_REQUEST
       });
-    });
+    } catch (error) {
+      console.eror('getMazeStateFirstTime action', error);
+    }
   }
 }
 

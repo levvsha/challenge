@@ -20,10 +20,15 @@ import * as GameActions from 'actions/GameActions.js';
 }))
 export default class  extends Component {
   static propTypes = {
-    allowedDirections: Type.object,
-    actions: Type.object,
-    isLoading: Type.bool,
-    isGameFinished: Type.bool
+    allowedDirections: Type.shape({
+      top: Type.bool.isRequired,
+      right: Type.bool.isRequired,
+      bottom: Type.bool.isRequired,
+      left: Type.bool.isRequired
+    }).isRequired,
+    actions: Type.objectOf(Type.func).isRequired,
+    isLoading: Type.bool.isRequired,
+    isGameFinished: Type.bool.isRequired
   };
 
   constructor() {
@@ -46,6 +51,10 @@ export default class  extends Component {
 
   handleKeyDown = event => {
     const { isLoading, isGameFinished, allowedDirections } = this.props;
+
+    if (event.keyCode >= 37 && event.keyCode <= 40) {
+      event.preventDefault();
+    }
 
     if (isGameFinished || isLoading) {
       return false;

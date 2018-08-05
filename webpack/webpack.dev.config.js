@@ -7,6 +7,7 @@ module.exports = {
   devtool: 'cheap-inline-module-source-map',
   entry: {
     'main': [
+      'babel-polyfill',
       'react-hot-loader/patch',
       'webpack-hot-middleware/client?reload=true',
       './src/app.js',
@@ -29,23 +30,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.css$/,
-        use: [
-          {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-              localIdentName: '[local]',
-              sourceMap: true
-            }
-          }
-        ]
-      },
-      {
-        test: /\.styl$/,
+        test: /\.styl|\.css/,
         use: [
           {
             loader: 'style-loader'
