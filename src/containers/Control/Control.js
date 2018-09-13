@@ -11,14 +11,7 @@ import ExitIcon from '../../../images/exit.svg';
 import Preloader from 'components/Preloader';
 import * as GameActions from 'actions/GameActions.js';
 
-@connect(state => ({
-  allowedDirections: state.game.allowedDirections,
-  isLoading: state.game.isLoading,
-  isGameFinished: state.game.isGameFinished
-}), dispatch => ({
-  actions: bindActionCreators(GameActions, dispatch)
-}))
-export default class  extends Component {
+export class Control extends Component {
   static propTypes = {
     allowedDirections: Type.shape({
       top: Type.bool.isRequired,
@@ -201,3 +194,15 @@ const styles = {
     visibility: 'visible'
   }
 };
+
+const mapStateToProps = state => ({
+  allowedDirections: state.game.allowedDirections,
+  isLoading: state.game.isLoading,
+  isGameFinished: state.game.isGameFinished
+});
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(GameActions, dispatch)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Control);

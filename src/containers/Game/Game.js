@@ -9,10 +9,7 @@ import Maze from 'containers/Maze';
 import Control from 'containers/Control';
 import IntroText from 'components/IntroText';
 
-@connect(state => ({
-  inTheGame: state.game.inTheGame
-}), null)
-export default class Game extends Component {
+export class Game extends Component {
   static propTypes = {
     inTheGame: Type.bool.isRequired
   };
@@ -45,3 +42,10 @@ export default class Game extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  inTheGame: state.game.inTheGame
+});
+
+export default connect(mapStateToProps)(Game);
+

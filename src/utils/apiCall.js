@@ -1,5 +1,4 @@
 import request from 'axios';
-
 import config from 'config';
 
 const responseType = 'json';

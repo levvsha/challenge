@@ -10,16 +10,7 @@ import * as GameActions from 'actions/GameActions.js';
 import RangeSlider from 'components/RangeSlider';
 import Preloader from 'components/Preloader';
 
-@connect(state => ({
-  difficultyExtremums: state.game.difficultyExtremums,
-  gameParams: state.game.gameParams,
-  mazeSizeExtremums: state.game.mazeSizeExtremums,
-  ponies: state.game.ponies,
-  isLoading: state.game.isLoading
-}), dispatch => ({
-  actions: bindActionCreators(GameActions, dispatch)
-}))
-export default class SetUp extends Component {
+export class SetUp extends Component {
   static propTypes = {
     difficultyExtremums: Type.arrayOf(Type.number).isRequired,
     gameParams: Type.shape({
@@ -138,3 +129,17 @@ export default class SetUp extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  difficultyExtremums: state.game.difficultyExtremums,
+  gameParams: state.game.gameParams,
+  mazeSizeExtremums: state.game.mazeSizeExtremums,
+  ponies: state.game.ponies,
+  isLoading: state.game.isLoading
+});
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(GameActions, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SetUp);

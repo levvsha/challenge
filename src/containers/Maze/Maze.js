@@ -4,20 +4,13 @@ import React, { Component } from 'react';
 import Type from 'prop-types';
 import { connect } from 'react-redux';
 
-import MazeEntity from '../../components/MazeEntity';
+import MazeEntity from 'components/MazeEntity';
+import Row from './Row';
 import PonyIcon from '../../../images/pony.svg';
 import EnemyIcon from '../../../images/enemy.svg';
 import ExitIcon from '../../../images/exit.svg';
 
-@connect(state => ({
-  mazeMatrix: state.game.mazeMatrix,
-  ponyCoords: state.game.ponyCoords,
-  enemyCoords: state.game.enemyCoords,
-  exitCoords: state.game.exitCoords,
-  isGameFinished: state.game.isGameFinished,
-  isWin: state.game.isWin
-}), null)
-export default class Maze extends Component {
+export class Maze extends Component {
   static propTypes = {
     ponyCoords: Type.shape({
       x: Type.number.isRequired,
@@ -50,7 +43,7 @@ export default class Maze extends Component {
       isGameFinished,
       isWin
     } = this.props;
-    console.log('this.props ==>', this.props);
+
     return (
       <div className="c-maze">
         {
@@ -89,27 +82,24 @@ export default class Maze extends Component {
         }
         {
           mazeMatrix && mazeMatrix.map((row, rowIndex) => (
-            <div
+            <Row
               key={rowIndex}
-              className="maze-row"
-            >
-              {row.map((cell, cellIndex) => (
-                <div
-                  key={cellIndex}
-                  className="maze-cell"
-                >
-                  {
-                    cell.top && <div className="maze-top-border" />
-                  }
-                  {
-                    cell.left && <div className="maze-left-border" />
-                  }
-                </div>
-              ))}
-            </div>
+              row={row}
+            />
           ))
         }
       </div>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  mazeMatrix: state.game.mazeMatrix,
+  ponyCoords: state.game.ponyCoords,
+  enemyCoords: state.game.enemyCoords,
+  exitCoords: state.game.exitCoords,
+  isGameFinished: state.game.isGameFinished,
+  isWin: state.game.isWin
+});
+
+export default connect(mapStateToProps)(Maze);
