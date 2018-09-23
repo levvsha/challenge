@@ -141,19 +141,19 @@ export function getMazeStateFirstTime(mazeId) {
         type: gameActionTypes.FINISH_REQUEST
       });
     } catch (error) {
-      console.eror('getMazeStateFirstTime action', error);
+      console.error('getMazeStateFirstTime action', error);
     }
   }
 }
 
 /* helper functions */
 
-const getCoords = (position, rowSize) => ({
+export const getCoords = (position, rowSize) => ({
   x: position % rowSize,
   y: Math.floor(position / rowSize)
 });
 
-const getNewPonyCoords = (currentCoords, direction) => {
+export const getNewPonyCoords = (currentCoords, direction) => {
   const newCoords = Object.assign({}, currentCoords);
 
   switch (direction) {
@@ -177,14 +177,14 @@ const getNewPonyCoords = (currentCoords, direction) => {
   return newCoords;
 };
 
-const getAllowedDirections = (mazeMatrix, ponyCoords) => ({
+export const getAllowedDirections = (mazeMatrix, ponyCoords) => ({
   left: !mazeMatrix[ponyCoords.y][ponyCoords.x].left,
   right: !!mazeMatrix[ponyCoords.y][ponyCoords.x + 1] && !mazeMatrix[ponyCoords.y][ponyCoords.x + 1].left,
   top: !mazeMatrix[ponyCoords.y][ponyCoords.x].top,
   bottom: !!mazeMatrix[ponyCoords.y + 1] && !mazeMatrix[ponyCoords.y + 1][ponyCoords.x].top,
 });
 
-const checkIsGameFinished = (coords) => {
+export const checkIsGameFinished = (coords) => {
   let isWin = false;
   let isFinish = false;
 
@@ -203,7 +203,7 @@ const checkIsGameFinished = (coords) => {
   }
 };
 
-function chunkArray(array, itemsInChunk) {
+export function chunkArray(array, itemsInChunk) {
   const arrayCopy = array.slice();
   const result = [];
 
@@ -214,7 +214,7 @@ function chunkArray(array, itemsInChunk) {
   return result;
 }
 
-const getCells = (data) => data.map(cell => {
+export const getCells = (data) => data.map(cell => {
   const cellObject = {};
 
   if (cell.length) {

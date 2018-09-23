@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "private": true,
-  "author": "Mikhail Shabrikov",
+  "author": "Mikhail Shabrikov (shabrikovm@gmail.com)",
   "contributors": [],
   "scripts": {
     "start": "node ./server.js",
@@ -56,8 +56,10 @@
     "jest-cli": "^23.6.0",
     "prop-types": "^15.6.0",
     "react-hot-loader": "4.3.3",
+    "react-test-renderer": "^16.5.2",
     "redbox-react": "^1.5.0",
     "redux-immutable-state-invariant": "^2.1.0",
+    "redux-mock-store": "^1.5.3",
     "redux-thunk": "^2.1.0",
     "style-loader": "^0.21.0",
     "stylus": "^0.54.5",
@@ -92,7 +94,8 @@
       "src"
     ],
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(svg)$": "<rootDir>/__mocks__/svgMock.js",
       "\\.(css|styl)$": "<rootDir>/__mocks__/styleMock.js"
     },
     "testRegex": "tests/.*\\.test\\.js$",

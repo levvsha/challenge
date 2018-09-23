@@ -195,14 +195,14 @@ const styles = {
   }
 };
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   allowedDirections: state.game.allowedDirections,
   isLoading: state.game.isLoading,
   isGameFinished: state.game.isGameFinished
 });
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(GameActions, dispatch)
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Control);

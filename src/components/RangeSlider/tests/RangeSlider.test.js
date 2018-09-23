@@ -35,6 +35,6 @@ describe('<RangeSlider />', () => {
     renderedComponent.find('InputRange').prop('onChange')();
 
     expect(updateSettingsSpy).toHaveBeenCalled();
-  })
+  });
 });
 
