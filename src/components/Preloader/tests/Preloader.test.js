@@ -1,11 +1,12 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import renderer from 'react-test-renderer';
 
-import Preloader from '../Preloader';
+import Preloader from '../';
 
 describe('<Preloader />', () => {
-  it('should render an <div> tag', () => {
-    const renderedComponent = shallow(<Preloader />);
-    expect(renderedComponent.type()).toEqual('div'); // eslint-disable-line
+  it('Preloader renders correctly', () => {
+    const tree = renderer.create(<Preloader />).toJSON();
+
+    expect(tree).toMatchSnapshot();
   });
 });

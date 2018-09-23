@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Preloader /> Preloader renders correctly 1`] = `
+<div
+  className="c-preloader"
+>
+  <div
+    className="spinner"
+  >
+    <div
+      className="bounce1"
+    />
+    <div
+      className="bounce2"
+    />
+    <div
+      className="bounce3"
+    />
+  </div>
+</div>
+`;
