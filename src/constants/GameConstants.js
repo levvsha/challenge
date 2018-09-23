@@ -1,4 +1,4 @@
-const prefix = 'SetUp/';
+const prefix = 'game/';
 
 export const SWITCH_TO_SETUP_MODE = `${ prefix }SWITCH_TO_SETUP_MODE`;
 export const UPDATE_SETTINGS = `${ prefix }UPDATE_SETTINGS`;

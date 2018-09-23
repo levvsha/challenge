@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`>>> game reducer +++ initial state is correct 1`] = `
+Object {
+  "allowedDirections": Object {
+    "bottom": false,
+    "left": false,
+    "right": false,
+    "top": false,
+  },
+  "currentMazeId": null,
+  "difficultyExtremums": Array [
+    0,
+    10,
+  ],
+  "enemyCoords": null,
+  "exitCoords": null,
+  "gameParams": Object {
+    "difficulty": 0,
+    "height": 15,
+    "selectedPony": "Twilight Sparkle",
+    "width": 15,
+  },
+  "inTheGame": false,
+  "isGameFinished": false,
+  "isLoading": false,
+  "isWin": false,
+  "mazeMatrix": Array [],
+  "mazeSizeExtremums": Array [
+    15,
+    25,
+  ],
+  "ponies": Array [
+    "Twilight Sparkle",
+    "Rainbow Dash",
+    "Pinkie Pie",
+    "Rarity",
+    "Applejack",
+    "Fluttershy",
+    "Spike",
+  ],
+  "ponyCoords": null,
+}
+`;
