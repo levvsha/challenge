@@ -87,7 +87,7 @@ describe('>>> game reducer', () => {
         top: true,
         bottom: false
       },
-      currentMazeId: "851573df-9a61-45bf-aefa-080a184d91f1",
+      currentMazeId: '851573df-9a61-45bf-aefa-080a184d91f1',
       enemyCoords: { x: 5, y: 4 },
       exitCoords: { x: 8, y: 14 },
       inTheGame: true,
@@ -105,4 +105,3 @@ describe('>>> game reducer', () => {
     expect(gameReducer(beforeState, action)).toEqual(afterState);
   });
 });
-

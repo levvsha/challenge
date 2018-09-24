@@ -43,7 +43,7 @@ export class Game extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   inTheGame: state.game.inTheGame
 });
 

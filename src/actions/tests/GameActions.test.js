@@ -9,10 +9,10 @@ import { getInitialState } from 'reducers/game';
 import {
   updateSettings,
   switchToSetUpMode,
-  makeStep,
+  // makeStep,
   createMaze,
-  getMazeState,
-  getMazeStateFirstTime,
+  // getMazeState,
+  // getMazeStateFirstTime,
   getCoords,
   getNewPonyCoords,
   getAllowedDirections,

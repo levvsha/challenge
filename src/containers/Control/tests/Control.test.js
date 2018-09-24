@@ -1,8 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
-import { bindActionCreators } from 'redux';
-import * as GameActions from 'actions/GameActions.js';
 
 import { Control, mapStateToProps, mapDispatchToProps } from '../';
 
@@ -34,7 +32,7 @@ describe('<Control />', () => {
     expect(dispatch.mock.calls[0][0]).toEqual({ type: 'game/SWITCH_TO_SETUP_MODE' });
   });
 
-  it('Control renders correctly', () => {
+  it('<Control /> renders correctly', () => {
     const directions = {
       top: false,
       right: true,
