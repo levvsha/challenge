@@ -25,4 +25,6 @@ MazeEntity.propTypes = {
   }).isRequired
 }
 
+MazeEntity.displayName = 'MazeEntity';
+
 export default MazeEntity;

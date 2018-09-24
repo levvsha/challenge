@@ -130,7 +130,7 @@ export class SetUp extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   difficultyExtremums: state.game.difficultyExtremums,
   gameParams: state.game.gameParams,
   mazeSizeExtremums: state.game.mazeSizeExtremums,
@@ -138,7 +138,7 @@ const mapStateToProps = state => ({
   isLoading: state.game.isLoading
 });
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(GameActions, dispatch)
 });
 

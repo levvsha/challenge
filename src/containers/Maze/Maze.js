@@ -93,7 +93,7 @@ export class Maze extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   mazeMatrix: state.game.mazeMatrix,
   ponyCoords: state.game.ponyCoords,
   enemyCoords: state.game.enemyCoords,

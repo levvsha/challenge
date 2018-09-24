@@ -1,0 +1,324 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SetUp /> <SetUp /> renders correctly 1`] = `
+<div
+  className="c-set-up"
+>
+  <h2
+    className="g-title"
+  >
+    Set up the game
+  </h2>
+  <label
+    htmlFor="characters"
+  >
+    Select a character:
+  </label>
+  <select
+    id="characters"
+    onChange={[Function]}
+    value="Rainbow Dash"
+  >
+    <option
+      value="Twilight Sparkle"
+    >
+      Twilight Sparkle
+    </option>
+    <option
+      value="Rainbow Dash"
+    >
+      Rainbow Dash
+    </option>
+    <option
+      value="Pinkie Pie"
+    >
+      Pinkie Pie
+    </option>
+    <option
+      value="Rarity"
+    >
+      Rarity
+    </option>
+    <option
+      value="Applejack"
+    >
+      Applejack
+    </option>
+    <option
+      value="Fluttershy"
+    >
+      Fluttershy
+    </option>
+    <option
+      value="Spike"
+    >
+      Spike
+    </option>
+  </select>
+  <div
+    className="c-range-slider"
+  >
+    <div
+      className="label"
+    >
+      Set maze width:
+    </div>
+    <div
+      className="range-slider"
+    >
+      <div
+        aria-disabled={false}
+        className="input-range"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onTouchStart={[Function]}
+      >
+        <span
+          className="input-range__label input-range__label--min"
+        >
+          <span
+            className="input-range__label-container"
+          >
+            15
+          </span>
+        </span>
+        <div
+          className="input-range__track input-range__track--background"
+          onMouseDown={[Function]}
+          onTouchStart={[Function]}
+        >
+          <div
+            className="input-range__track input-range__track--active"
+            style={
+              Object {
+                "left": "0%",
+                "width": "50%",
+              }
+            }
+          />
+          <span
+            className="input-range__slider-container"
+            style={
+              Object {
+                "left": "50%",
+                "position": "absolute",
+              }
+            }
+          >
+            <span
+              className="input-range__label input-range__label--value"
+            >
+              <span
+                className="input-range__label-container"
+              >
+                20
+              </span>
+            </span>
+            <div
+              aria-valuemax={25}
+              aria-valuemin={15}
+              aria-valuenow={20}
+              className="input-range__slider"
+              draggable="false"
+              onKeyDown={[Function]}
+              onMouseDown={[Function]}
+              onTouchStart={[Function]}
+              role="slider"
+              tabIndex="0"
+            />
+          </span>
+        </div>
+        <span
+          className="input-range__label input-range__label--max"
+        >
+          <span
+            className="input-range__label-container"
+          >
+            25
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div
+    className="c-range-slider"
+  >
+    <div
+      className="label"
+    >
+      Set maze height:
+    </div>
+    <div
+      className="range-slider"
+    >
+      <div
+        aria-disabled={false}
+        className="input-range"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onTouchStart={[Function]}
+      >
+        <span
+          className="input-range__label input-range__label--min"
+        >
+          <span
+            className="input-range__label-container"
+          >
+            15
+          </span>
+        </span>
+        <div
+          className="input-range__track input-range__track--background"
+          onMouseDown={[Function]}
+          onTouchStart={[Function]}
+        >
+          <div
+            className="input-range__track input-range__track--active"
+            style={
+              Object {
+                "left": "0%",
+                "width": "60%",
+              }
+            }
+          />
+          <span
+            className="input-range__slider-container"
+            style={
+              Object {
+                "left": "60%",
+                "position": "absolute",
+              }
+            }
+          >
+            <span
+              className="input-range__label input-range__label--value"
+            >
+              <span
+                className="input-range__label-container"
+              >
+                21
+              </span>
+            </span>
+            <div
+              aria-valuemax={25}
+              aria-valuemin={15}
+              aria-valuenow={21}
+              className="input-range__slider"
+              draggable="false"
+              onKeyDown={[Function]}
+              onMouseDown={[Function]}
+              onTouchStart={[Function]}
+              role="slider"
+              tabIndex="0"
+            />
+          </span>
+        </div>
+        <span
+          className="input-range__label input-range__label--max"
+        >
+          <span
+            className="input-range__label-container"
+          >
+            25
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div
+    className="c-range-slider"
+  >
+    <div
+      className="label"
+    >
+      Set difficulty:
+    </div>
+    <div
+      className="range-slider"
+    >
+      <div
+        aria-disabled={false}
+        className="input-range"
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onTouchStart={[Function]}
+      >
+        <span
+          className="input-range__label input-range__label--min"
+        >
+          <span
+            className="input-range__label-container"
+          >
+            0
+          </span>
+        </span>
+        <div
+          className="input-range__track input-range__track--background"
+          onMouseDown={[Function]}
+          onTouchStart={[Function]}
+        >
+          <div
+            className="input-range__track input-range__track--active"
+            style={
+              Object {
+                "left": "0%",
+                "width": "30%",
+              }
+            }
+          />
+          <span
+            className="input-range__slider-container"
+            style={
+              Object {
+                "left": "30%",
+                "position": "absolute",
+              }
+            }
+          >
+            <span
+              className="input-range__label input-range__label--value"
+            >
+              <span
+                className="input-range__label-container"
+              >
+                3
+              </span>
+            </span>
+            <div
+              aria-valuemax={10}
+              aria-valuemin={0}
+              aria-valuenow={3}
+              className="input-range__slider"
+              draggable="false"
+              onKeyDown={[Function]}
+              onMouseDown={[Function]}
+              onTouchStart={[Function]}
+              role="slider"
+              tabIndex="0"
+            />
+          </span>
+        </div>
+        <span
+          className="input-range__label input-range__label--max"
+        >
+          <span
+            className="input-range__label-container"
+          >
+            10
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <button
+    className="button button-outline float-right"
+    disabled={false}
+    onClick={[Function]}
+  >
+    Start game
+  </button>
+</div>
+`;

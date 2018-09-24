@@ -14,8 +14,10 @@ const Row = ({ row }) => (
   </div>
 );
 
+Row.displayName = 'Row';
+
 Row.propTypes = {
   row: Type.arrayOf(Type.object).isRequired
-}
+};
 
 export default Row;

@@ -3,16 +3,17 @@ import thunk from 'redux-thunk';
 import createMazeResponseMock from 'api/__mocks__/createMazeResponseMock';
 import getMazeResponseMock from 'api/__mocks__/getMazeResponseMock';
 import makeStepResponseMock from 'api/__mocks__/makeStepResponseMock';
+jest.mock('api/game');
 import * as gameAPI from 'api/game';
 import { getInitialState } from 'reducers/game';
 
 import {
   updateSettings,
   switchToSetUpMode,
-  // makeStep,
+  makeStep,
   createMaze,
-  // getMazeState,
-  // getMazeStateFirstTime,
+  getMazeState,
+  getMazeStateFirstTime,
   getCoords,
   getNewPonyCoords,
   getAllowedDirections,
@@ -38,6 +39,231 @@ gameAPI.makeStep = () => new Promise((resolve) => {
 });
 
 describe('>>> GameActions', () => {
+  afterAll(() => {
+    jest.resetAllMocks();
+  });
+
+  it('+++ createMaze action', () => {
+    const store = mockStore(getInitialState());
+
+    const expectedActionsForCreateMaze = [
+      {
+        type: 'game/START_REQUEST'
+      },
+      {
+        type: 'game/UPDATE_MAZE',
+        updatedFields: {
+          mazeMatrix: [
+            [
+              {
+                left: true,
+                top: true
+              },
+              {
+                left: true,
+                top: true
+              },
+              {
+                top: true
+              }
+            ],
+            [
+              {
+                top: true
+              },
+              {
+                top: true
+              },
+              {
+                left: true,
+                top: true
+              }
+            ],
+            [
+              {
+                top: true
+              },
+              {
+                top: true
+              },
+              {
+                top: true
+              }
+            ]
+          ],
+          ponyCoords: {
+            x: 2,
+            y: 0
+          },
+          enemyCoords: {
+            x: 1,
+            y: 2
+          },
+          exitCoords: {
+            x: 1,
+            y: 1
+          },
+          allowedDirections: {
+            left: true,
+            right: false,
+            top: false,
+            bottom: false
+          },
+          inTheGame: true,
+          currentMazeId: 'e3e6d606-9dad-453d-a48b-57b934cc88b3'
+        }
+      },
+      {
+        type: 'game/FINISH_REQUEST'
+      }
+    ];
+
+    store.dispatch(createMaze())
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActionsForCreateMaze);
+      })
+      .catch(error => {
+        console.error('test failed', error);
+      });
+  });
+
+  it('+++ makeStep action', () => {
+    const stateMock = {
+      game: {
+        ponies: [
+          'Twilight Sparkle',
+          'Rainbow Dash',
+          'Pinkie Pie',
+          'Rarity',
+          'Applejack',
+          'Fluttershy',
+          'Spike'
+        ],
+        mazeSizeExtremums: [
+          15,
+          25
+        ],
+        difficultyExtremums: [
+          0,
+          10
+        ],
+        gameParams: {
+          selectedPony: 'Twilight Sparkle',
+          width: 15,
+          height: 15,
+          difficulty: 0
+        },
+        mazeMatrix: [
+          [
+            {
+              left: true,
+              top: true,
+            },
+            {
+              top: true,
+            },
+            {
+              left: true,
+              top: true,
+            },
+          ],
+          [
+            {
+              left: true,
+              top: true,
+            },
+            {},
+            {
+              left: true,
+              top: true,
+            },
+          ],
+          [
+            {
+              left: true,
+            },
+            {
+              top: true,
+            },
+            {
+              left: true,
+            },
+          ],
+        ],
+        ponyCoords: {
+          x: 1,
+          y: 2
+        },
+        enemyCoords: {
+          x: 2,
+          y: 2
+        },
+        exitCoords: {
+          x: 3,
+          y: 2
+        },
+        inTheGame: false,
+        isLoading: false,
+        currentMazeId: 'maze-id',
+        isGameFinished: false,
+        isWin: false,
+        allowedDirections: {
+          left: true,
+          right: false,
+          top: true,
+          bottom: false
+        }
+      }
+    };
+
+    const expectedActionsForMakeStep = [
+      {
+        type: 'game/START_REQUEST'
+      },
+      {
+        type: 'game/UPDATE_MAZE',
+        updatedFields: {
+          ponyCoords: {
+            x: 0,
+            y: 2
+          },
+          allowedDirections: {
+            left: false,
+            right: true,
+            top: true,
+            bottom: false
+          }
+        }
+      },
+      {
+        type: 'game/GAME_FINISHED',
+        isWin: false
+      },
+      {
+        type: 'game/FINISH_REQUEST'
+      },
+      {
+        type: 'game/UPDATE_MAZE',
+        updatedFields: {
+          enemyCoords: {
+            x: 1,
+            y: 2
+          }
+        }
+      }
+    ];
+
+    const store = mockStore(stateMock);
+
+    store.dispatch(makeStep('west'))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActionsForMakeStep);
+      })
+      .catch(error => {
+        console.error('test failed', error);
+      });
+  });
+
   it('+++ updateSettings action', () => {
     const action = {
       type: 'game/UPDATE_SETTINGS',
@@ -50,14 +276,6 @@ describe('>>> GameActions', () => {
 
   it('+++ switchToSetUpMode action', () => {
     expect(switchToSetUpMode()).toEqual({ type: 'game/SWITCH_TO_SETUP_MODE'});
-  });
-
-  it('+++ createMaze action', () => {
-    const store = mockStore(getInitialState());
-
-    store.dispatch(createMaze()).then(() => {
-      console.log('store ==>', store.getActions());
-    });
   });
 });
 
@@ -233,4 +451,3 @@ describe('>>> GameActions helpers', () => {
     expect(getCells(initialCells)).toEqual(expectedCells);
   });
 });
-

@@ -14,6 +14,8 @@ const Preloader = () => (
   </div>
 );
 
+Preloader.displayName = 'Preloader';
+
 // Preloader.propTypes = {};
 
 export default Preloader;

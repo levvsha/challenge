@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Maze /> <Maze /> renders correctly 1`] = `
+<div
+  className="c-maze"
+>
+  <div />
+  <div />
+  <div />
+  <div
+    className="maze-row"
+  >
+    <div
+      className="maze-cell"
+    >
+      <div
+        className="maze-top-border"
+      />
+      <div
+        className="maze-left-border"
+      />
+    </div>
+    <div
+      className="maze-cell"
+    >
+      <div
+        className="maze-top-border"
+      />
+    </div>
+    <div
+      className="maze-cell"
+    >
+      <div
+        className="maze-top-border"
+      />
+      <div
+        className="maze-left-border"
+      />
+    </div>
+  </div>
+  <div
+    className="maze-row"
+  >
+    <div
+      className="maze-cell"
+    >
+      <div
+        className="maze-top-border"
+      />
+      <div
+        className="maze-left-border"
+      />
+    </div>
+    <div
+      className="maze-cell"
+    />
+    <div
+      className="maze-cell"
+    >
+      <div
+        className="maze-top-border"
+      />
+      <div
+        className="maze-left-border"
+      />
+    </div>
+  </div>
+  <div
+    className="maze-row"
+  >
+    <div
+      className="maze-cell"
+    >
+      <div
+        className="maze-left-border"
+      />
+    </div>
+    <div
+      className="maze-cell"
+    >
+      <div
+        className="maze-top-border"
+      />
+    </div>
+    <div
+      className="maze-cell"
+    >
+      <div
+        className="maze-left-border"
+      />
+    </div>
+  </div>
+</div>
+`;

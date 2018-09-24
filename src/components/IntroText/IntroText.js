@@ -63,6 +63,8 @@ const IntroText = () => (
   </div>
 );
 
+IntroText.displayName = 'IntroText';
+
 // IntroText.propTypes = {};
 
 export default IntroText;

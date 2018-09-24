@@ -19,4 +19,6 @@ Cell.propTypes = {
   }).isRequired
 }
 
+Cell.displayName = 'Cell';
+
 export default Cell;
